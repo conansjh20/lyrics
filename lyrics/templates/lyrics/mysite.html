@@ -1,0 +1,47 @@
+{% extends 'lyrics/base.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    <p><center>
+    <div><h1>일본 노래 가사<br>
+     검색 &amp; 독음 &amp; 번역</h1></div>
+    </center></p>
+    <div>
+    <center>
+        <form action="{% url 'findLyrics' %}" method = "post">
+        {% csrf_token %}
+        <input placeholder="가수와 노래 제목을 입력해 주세요." type="text" name="inputValue"/>
+        <button type="submit" class="button button1"> 
+            찾기 
+        </button>
+    </center>
+    </div>
+    <p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center>
+    <div id="box2">
+    conansjh20@naver.com <br>
+    <a href="https://conansjh20.tistory.com/" target="_blank">티스토리 블로그</a>
+    <br>
+    <br>
+    궁금하신 점은 Email 또는 티스토리 블로그에 남겨주세요.
+    <br>
+    가사는 <a href="http://j-lyric.net" target="_blank">j-lyric.net</a> 에서 가져왔습니다.
+    </div>
+    </center>
+    </p>
+{% endblock %}

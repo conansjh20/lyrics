@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>검색어확인</title>
+</head>
+<body>
+    {% for word in words %}
+    <div>
+    <div>
+        {{ word.singersong }}
+    </div>
+    <div>
+        {{ word.created_time }}
+    </div>
+    </div>
+    {% endfor %}
+</body>
+</html>
