@@ -2,15 +2,25 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <style>
+    .grid-container {
+        display: grid;
+        grid-column-gap: 50px;
+        grid-template-columns: 300px 300px;
+    }
+
+    .grid-item {
+    }
+    </style>
     <title>검색어확인</title>
 </head>
 <body>
     {% for word in words %}
-    <div>
-    <div>
+    <div class="grid-container">
+    <div class="grid-item">
         {{ word.singersong }}
     </div>
-    <div>
+    <div class="grid-item">
         {{ word.created_time }}
     </div>
     </div>

@@ -1,0 +1,176 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AAA</title>
+
+<style>
+
+.content {
+  padding: 0 2px;
+}
+.btn {
+    width: 30px;
+}
+.btn_blank {
+  border:none;
+  background-color:white;
+  color:white;
+  width: 30px;
+}
+
+</style>
+
+<script>
+    function input_Text(wo){
+        wo = document.getElementById("test").value + wo;
+        document.getElementById("test").value = wo;
+    }
+
+    function CopyUrlToClipboard(){
+      	var obShareUrl = document.getElementById("test");
+      	obShareUrl.select();  // 해당 값이 선택되도록 select() 합니다
+	      document.execCommand("copy"); // 클립보드에 복사합니다.
+      	obShareUrl.blur(); // 선택된 것을 다시 선택안된것으로 바꿈니다.
+        if (confirm("클립보드에 복사되었습니다. 창을 닫으시겠습니까?")) {
+            window.open('', '_self', '');
+            window.close();
+        }
+    }
+</script>
+
+</head>
+<body>
+<input type='text' id='test'>
+<span class="btn-type1"><button OnClick="javascript:CopyUrlToClipboard()">복사하기</button></span>
+
+
+
+<br>
+일본어(히라가나) 입력기
+<div class="content">
+<p>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("あ")'>あ</button>
+    <button class="btn" onclick='input_Text("か")'>か</button>
+    <button class="btn" onclick='input_Text("さ")'>さ</button>
+    <button class="btn" onclick='input_Text("た")'>た</button>
+    <button class="btn" onclick='input_Text("な")'>な</button>
+    <button class="btn" onclick='input_Text("は")'>は</button>
+    <button class="btn" onclick='input_Text("ま")'>ま</button>
+    <button class="btn" onclick='input_Text("や")'>や</button>
+    <button class="btn" onclick='input_Text("ら")'>ら</button>
+    <button class="btn" onclick='input_Text("わ")'>わ</button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("い")'>い</button>
+    <button class="btn" onclick='input_Text("き")'>き</button>
+    <button class="btn" onclick='input_Text("し")'>し</button>
+    <button class="btn" onclick='input_Text("ち")'>ち</button>
+    <button class="btn" onclick='input_Text("に")'>に</button>
+    <button class="btn" onclick='input_Text("ひ")'>ひ</button>
+    <button class="btn" onclick='input_Text("み")'>み</button>
+    <button class="btn_blank" onclick='input_Text(" ")'> </button>
+    <button class="btn" onclick='input_Text("り")'>り</button>
+    <button class="btn_blank" onclick='input_Text(" ")'> </button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("う")'>う</button>
+    <button class="btn" onclick='input_Text("く")'>く</button>
+    <button class="btn" onclick='input_Text("す")'>す</button>
+    <button class="btn" onclick='input_Text("つ")'>つ</button>
+    <button class="btn" onclick='input_Text("ぬ")'>ぬ</button>
+    <button class="btn" onclick='input_Text("ふ")'>ふ</button>
+    <button class="btn" onclick='input_Text("む")'>む</button>
+    <button class="btn" onclick='input_Text("ゆ")'>ゆ</button>
+    <button class="btn" onclick='input_Text("る")'>る</button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("え")'>え</button>
+    <button class="btn" onclick='input_Text("け")'>け</button>
+    <button class="btn" onclick='input_Text("せ")'>せ</button>
+    <button class="btn" onclick='input_Text("て")'>て</button>
+    <button class="btn" onclick='input_Text("ね")'>ね</button>
+    <button class="btn" onclick='input_Text("へ")'>へ</button>
+    <button class="btn" onclick='input_Text("め")'>め</button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn" onclick='input_Text("れ")'>れ</button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("お")'>お</button>
+    <button class="btn" onclick='input_Text("こ")'>こ</button>
+    <button class="btn" onclick='input_Text("そ")'>そ</button>
+    <button class="btn" onclick='input_Text("と")'>と</button>
+    <button class="btn" onclick='input_Text("の")'>の</button>
+    <button class="btn" onclick='input_Text("ほ")'>ほ</button>
+    <button class="btn" onclick='input_Text("も")'>も</button>
+    <button class="btn" onclick='input_Text("よ")'>よ</button>
+    <button class="btn" onclick='input_Text("ろ")'>ろ</button>
+    <button class="btn" onclick='input_Text("を")'>を</button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("が")'>が</button>
+    <button class="btn" onclick='input_Text("ざ")'>ざ</button>
+    <button class="btn" onclick='input_Text("だ")'>だ</button>
+    <button class="btn" onclick='input_Text("ば")'>ば</button>
+    <button class="btn" onclick='input_Text("ぱ")'>ぱ</button>
+    <button class="btn" onclick='input_Text("ゃ")'>ゃ</button>
+    <button class="btn" onclick='input_Text("ゅ")'>ゅ</button>
+    <button class="btn" onclick='input_Text("ょ")'>ょ</button>
+    <button class="btn" onclick='input_Text("っ")'>っ</button>
+    <button class="btn" onclick='input_Text("ん")'>ん</button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("ぎ")'>ぎ</button>
+    <button class="btn" onclick='input_Text("じ")'>じ</button>
+    <button class="btn" onclick='input_Text("ぢ")'>ぢ</button>
+    <button class="btn" onclick='input_Text("び")'>び</button>
+    <button class="btn" onclick='input_Text("ぴ")'>ぴ</button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn" onclick='input_Text("ー")'>ー</button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("ぐ")'>ぐ</button>
+    <button class="btn" onclick='input_Text("ず")'>ず</button>
+    <button class="btn" onclick='input_Text("づ")'>づ</button>
+    <button class="btn" onclick='input_Text("ぶ")'>ぶ</button>
+    <button class="btn" onclick='input_Text("ぷ")'>ぷ</button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("げ")'>げ</button>
+    <button class="btn" onclick='input_Text("ぜ")'>ぜ</button>
+    <button class="btn" onclick='input_Text("で")'>で</button>
+    <button class="btn" onclick='input_Text("べ")'>べ</button>
+    <button class="btn" onclick='input_Text("ぺ")'>ぺ</button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    </div>
+    <div class="btn-group">
+    <button class="btn" onclick='input_Text("ご")'>ご</button>
+    <button class="btn" onclick='input_Text("ぞ")'>ぞ</button>
+    <button class="btn" onclick='input_Text("ど")'>ど</button>
+    <button class="btn" onclick='input_Text("ぼ")'>ぼ</button>
+    <button class="btn" onclick='input_Text("ぽ")'>ぽ</button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    <button class="btn_blank" onclick='input_Text("")'> </button>
+    </div>
+</p>
+</div>
+</body>
+</html>

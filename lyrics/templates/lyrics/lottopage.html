@@ -1,4 +1,4 @@
-{% extends 'lyrics/base.html' %}
+{% extends 'lyrics/base2.html' %}
 {% load static %}
 {% block content %}
 <br>
@@ -8,25 +8,20 @@
 <br>
     <p>
     <center>
-    <div><h1>일본 노래 가사 검색 &amp; 독음</h1></div>
+    <div><h1>로또 당첨 번호 확인</h1></div>
     </center>
     </p>
     <p>
     <div>
     <center>
-        <form action="{% url 'findLyrics' %}" method = "post">
+        <form action="{% url 'lottoresult' %}" method = "post">
         {% csrf_token %}
-        <input placeholder="가수 이름과 제목을 입력하세요" type="text" name="inputValue"/>
+        <input placeholder="당첨번호를 입력하세요. (예: 1 11 21 31 41 45)" type="text" name="inputVal"/>
         <button type="submit" class="button button1">
-            찾기
+            확인
         </button>
     </center>
     </div>
-    </p>
-    <p>
-    <center>
-    <a onclick="inputPage()">일본어(히라가나) 입력기</a>
-    </center>
     </p>
 <br>
 <br>

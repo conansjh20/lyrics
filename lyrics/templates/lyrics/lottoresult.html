@@ -1,0 +1,43 @@
+{% extends 'lyrics/base2.html' %}
+{% load static %}
+{% block content %}
+    <div class="center">
+    <div id="box1"><h2> 로또 당첨 번호 확인 </h2></div>
+    <div id="box1">
+    <form action="{% url 'lottoresult' %}" method = "post">
+    {% csrf_token %}
+    <input placeholder="당첨번호를 입력하세요. (예: 1 11 21 31 41 45)" type="text" name="inputVal"/>
+    <button type="submit" class="button button1"> 
+    확인
+    </button>
+    </div>
+        <div id="box1" class="row">
+                <h4>
+                제 {{ tt }}회
+                </h4>
+                <h4>
+                날짜 : {{ td }}
+                </h4>
+                <h4>
+                당첨 번호 : {{ wns }}
+                </h4>
+                <h4>
+                보너스 번호 : {{ bon }}
+                </h4>
+                <h4>
+                내 번호 : {{ mns }}
+                </h4>
+                <h4>
+                등수 : {{ mr }}
+                </h4>
+                <h4>
+                반드시 회차 및 날짜와 내가 입력한 번호를 다시 한번 확인하세요.
+                </h4>
+        </div>
+    </p>
+    <div id="box2">
+    conansjh20@naver.com <br>
+    <a href="https://conansjh20.tistory.com/" target="_blank">티스토리 블로그</a>
+    </div>
+    </div>
+{% endblock %}

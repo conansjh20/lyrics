@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup as Soup
 import re
-from googletrans import Translator as tr
 from furigana.furigana import print_plaintext
 import xlrd
 
@@ -26,7 +25,6 @@ def get_lyrics(inputInfo):
     lyricsFinal = lyricsCore.find("p",{"id":"Lyric"}).get_text(separator="\n")
     SingerSong = lyricsCore.find("h1").get_text(separator="\n")
     ly = lyricsFinal.split("\n")
-    trans = tr()
 
     excel_open = xlrd.open_workbook('/home/conansjh20/lyric/words-book.xlsx')
     excel_sheet = excel_open.sheet_by_name('1')
@@ -46,8 +44,6 @@ def get_lyrics(inputInfo):
     list_sub3 = ["ん","ン"]
     
     for lyric in ly:
-        transLyrics = trans.translate(lyric, dest="ko").text
-        
         lyric_furi = print_plaintext(lyric)
         
         key_word_lists = []
@@ -82,4 +78,4 @@ def get_lyrics(inputInfo):
             yield list_kor[key]
             # print(list_kor[key],end="")
 
-        yield "\n" + transLyrics + "\n\n"
+        yield "\n" + "\n"
