@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>히라가나 입력기</title>
+
+<style>
+
+.content {
+  padding: 0 2px;
+}
+.btn {
+    width: 30px;
+}
+.btn_blank {
+  border:none;
+  background-color:white;
+  color:white;
+  width: 30px;
+}
+
+</style>
+
+<script>
+    function input_Text(wo){
+        wo = document.getElementById("test").value + wo;
+        document.getElementById("test").value = wo;
+    }
+
+function CopyToClipboard(containerid) {
+  if (document.selection) {
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById(containerid));
+    range.select().createTextRange();
+    document.execCommand("copy");
+  } else if (window.getSelection) {
+    var range = document.createRange();
+    range.selectNode(document.getElementById(containerid));
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    alert("복사하였습니다.");
+    window.close();
+  }
+}
+</script>
+
+</head>
+<body>
+  <form action = "{% url 'inputC2' %}" method = "post">
+    {% csrf_token %}
+    <input placeholder = "입력" type="text" name="inputKor"/><br>
+    <input type="radio" name="hira" value="4">히라가나</input>
+    <input type="radio" name="hira" value="5">가타가나</input>
+    <button type = "submit" class = "button button1">확인</button>
+  <div id = 'my'>{{outputJap}}</div>
+  <span class="btn-type1"><button OnClick="CopyToClipboard('my')">복사하기</button></span>
+</body>

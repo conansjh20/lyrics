@@ -7,21 +7,23 @@
 <br>
 <br>
     <p>
-    <center>
-    <div><h1>로또 당첨 번호 확인</h1></div>
-    </center>
+        <center>
+            <div>
+                <h1>로또 당첨 번호 확인</h1>
+            </div>
+        </center>
     </p>
     <p>
-    <div>
-    <center>
-        <form action="{% url 'lottoresult' %}" method = "post">
-        {% csrf_token %}
-        <input placeholder="당첨번호를 입력하세요. (예: 1 11 21 31 41 45)" type="text" name="inputVal"/>
-        <button type="submit" class="button button1">
-            확인
-        </button>
-    </center>
-    </div>
+        <div>
+            <center>
+                <form action="{% url 'lottoresult' %}" method = "post">
+                {% csrf_token %}
+                <input placeholder="내 번호를 입력하세요. (예: 1 11 21 31 41 45)" type="text" name="inputVal"/>
+                <button type="submit" class="button button1">
+                확인
+                </button>
+            </center>
+        </div>
     </p>
 <br>
 <br>
@@ -30,9 +32,9 @@
 <br>
 <p>
     <center>
-    <div id="box2">
-    conansjh20@naver.com <br>
-    <a href="https://conansjh20.tistory.com/" target="_blank">티스토리 블로그</a>
+        <div id="box2">
+            conansjh20@naver.com <br>
+            <a href="https://conansjh20.tistory.com/" target="_blank">티스토리 블로그</a>
     </center>
 </p>
 {% endblock %}

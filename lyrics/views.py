@@ -4,6 +4,7 @@ from django.template import loader
 from lyrics.models import Post
 from .jlyrics import get_lyrics
 from .lotto import lotto
+from .word_converter import word_convert
 
 # Create your views here.
 def mysite(req):
@@ -48,6 +49,18 @@ def findLyrics(req):
 def inputJ(req):
     context = {}
     return render(req, 'lyrics/inputJ.html', context)
+
+def inputC(self):
+    context = {}
+    return render(self, 'lyrics/convert.html', context)
+
+def inputC2(self):
+    inputKo = str(self.POST['inputKor'])
+    inputHika = 4
+    inputHika = int(self.POST['hira'])
+    outputJa = word_convert(inputKo, inputHika)
+    context = {"outputJap" : outputJa}
+    return render(self, 'lyrics/convert.html', context)
 
 def list(req):
     context = {
