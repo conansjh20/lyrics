@@ -36,15 +36,26 @@ def lottoresult(req):
     return render(req, 'lyrics/lottoresult.html', context)
 
 def findLyrics(req):
-    inputInfo = str(req.POST['inputValue'])
-    keywords = get_lyrics(inputInfo)
-    keyword = "".join(keywords)
-    context = {
-        'keyword' : keyword
-    }
-    post = Post.objects.create(singersong=inputInfo)
-    post.save()
-    return render(req, 'lyrics/findLyrics.html', context)
+    input_song_info = str(req.POST['input_song'])
+    input_singer_info = str(req.POST['input_singer'])
+    keywords = get_lyrics(input_song_info,input_singer_info)
+    keywords_one_text = ''.join(get_lyrics(input_song_info,input_singer_info))
+    if keywords_one_text == "error!":
+        return render(req, 'lyrics/error.html')
+    else:
+        song_info = next(keywords)
+        singer_info = next(keywords)
+        lyrics_info = "".join(keywords)
+        context = {
+            'song_info' : song_info,
+            'singer_info' : singer_info,
+            'lyrics_info' : lyrics_info,
+        }
+        post = Post.objects.create(song_model = song_info)
+        post.save()
+        post2 = Post.objects.create(singer_model = singer_info)
+        post2.save()
+        return render(req, 'lyrics/findLyrics.html', context)
 
 def inputJ(req):
     context = {}

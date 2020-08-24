@@ -4,9 +4,9 @@ import re
 from furigana.furigana import print_plaintext
 import xlrd
 
-def get_lyrics(inputInfo):
+def get_lyrics(input_song, input_singer):
 
-    keyword = "J-Lyric "+ inputInfo +" 歌詞"
+    keyword = "J-Lyric "+ input_singer + input_song +" 歌詞"
     url = "https://google.com/search?q="
     google_result = requests.get(url+keyword)
     google_result_page = google_result.content
@@ -17,65 +17,72 @@ def get_lyrics(inputInfo):
     get_address_only = link.get("href")
     first_address = re.compile("http://j-lyric.net/\w+/\w+/\w+[.]html")
     get_lyric_page = first_address.search(get_address_only)
-    lyricPage = get_lyric_page.group()
-    lyrics = requests.get(lyricPage)
-    lyricsCode = lyrics.content
-    lyricsCore = Soup(lyricsCode, "html.parser")
+    try: 
+        lyricPage = get_lyric_page.group()
+        lyrics = requests.get(lyricPage)
+        lyricsCode = lyrics.content
+        lyricsCore = Soup(lyricsCode, "html.parser")
 
-    lyricsFinal = lyricsCore.find("p",{"id":"Lyric"}).get_text(separator="\n")
-    SingerSong = lyricsCore.find("h1").get_text(separator="\n")
-    ly = lyricsFinal.split("\n")
+        lyricsFinal = lyricsCore.find("p",{"id":"Lyric"}).get_text(separator="\n")
+        lyricsFinal = lyricsFinal.split("\n")   #가사 한줄마다 리스트의 요소로 만든다.
 
-    excel_open = xlrd.open_workbook('/home/conansjh20/lyric/words-book.xlsx')
-    excel_sheet = excel_open.sheet_by_name('1')
+        info_song = lyricsCore.find("div", {"class":"cap"}).text
+        info_song = info_song[:-3]  #곡명정보
+        yield info_song + "\n"
 
-    list_jap = []
-    list_kor = [] 
+        info_singer = lyricsCore.find("p", {"class":"sml"}).text    
+        info_singer = info_singer[2:]   #가수정보
+        yield info_singer + "\n"
 
-    yield SingerSong
-    yield "\n\n"
+        excel_open = xlrd.open_workbook('/home/conansjh20/lyric/words-book.xlsx')
+        excel_sheet = excel_open.sheet_by_name('1')
 
-    for a in range(excel_sheet.nrows):
-        list_jap.append(excel_sheet.cell_value(a,0))
-        list_kor.append(excel_sheet.cell_value(a,1))
+        list_jap = []
+        list_kor = [] 
 
-    list_sub1 = ["ゃ","ゅ","ょ","ャ","ュ","ョ"]
-    list_sub2 = ["っ","ッ"]
-    list_sub3 = ["ん","ン"]
-    
-    for lyric in ly:
-        lyric_furi = print_plaintext(lyric)
-        
-        key_word_lists = []
+        for a in range(excel_sheet.nrows):
+            list_jap.append(excel_sheet.cell_value(a,0))    #일본어 리스트 생성
+            list_kor.append(excel_sheet.cell_value(a,1))    #한글 리스트 생성
 
-        for lyfu in lyric_furi:
-            yield lyfu
-            key_word_lists.append(lyfu)
+        list_sub1 = ["ゃ","ゅ","ょ","ャ","ュ","ョ"]          #야유요 리스트
+        list_sub2 = ["っ","ッ"]                             #촉음 리스트
+        list_sub3 = ["ん","ン"]                             #응 리스트
 
-        key_word_list = "".join(key_word_lists)
+        for lyric in lyricsFinal:                           #가사 한줄마다 for문으로 반복
+            lyric_furi = print_plaintext(lyric)             #후리가나 들어간 가사 한줄
+            
+            key_word_lists = []
+            
+            for lyfu in lyric_furi:                         #한줄에서 한자씩 for문으로 반복
+                yield lyfu
+                key_word_lists.append(lyfu)                 #key_word_lists에 추가
 
-        key_index = []
-        
-        for n in range(0, len(key_word_list)):
+            key_word_list = "".join(key_word_lists)         #리스트를 하나의 string으로 전환 -> 일본어 가사
 
-            if key_word_list[n] in list_jap:
-                key_index.append(list_jap.index(key_word_list[n]))
+            key_index = []
 
-            elif key_word_list[n] in list_sub1:
-                key_index.append(list_jap.index(list_jap[key_index.pop()]+key_word_list[n]))
+            for n in range(0, len(key_word_list)):          #독음작성위한 for문으로 반복
+                if key_word_list[n] in list_jap:
+                    key_index.append(list_jap.index(key_word_list[n]))
+                elif key_word_list[n] in list_sub1:
+                    key_index.append(list_jap.index(list_jap[key_index.pop()]+key_word_list[n]))
+                elif key_word_list[n] in list_sub2:
+                    key_index.append(list_jap.index(list_jap[key_index.pop()]+key_word_list[n]))
+                elif key_word_list[n] in list_sub3:
+                    key_index.append(list_jap.index(list_jap[key_index.pop()]+key_word_list[n]))
 
-            elif key_word_list[n] in list_sub2:
-                key_index.append(list_jap.index(list_jap[key_index.pop()]+key_word_list[n]))
-    
-            elif key_word_list[n] in list_sub3:
-                key_index.append(list_jap.index(list_jap[key_index.pop()]+key_word_list[n]))
-        
-        key_iter = iter(key_index)
+            key_iter = iter(key_index)
 
-        yield "\n"
-        
-        for key in key_iter:
-            yield list_kor[key]
-            # print(list_kor[key],end="")
+            yield "\n"
 
-        yield "\n" + "\n"
+            for key in key_iter:
+                yield list_kor[key]
+
+            yield "\n\n"
+
+        #    reading_sound.append("\n")
+
+        # key_word_lists = ''.join(key_word_lists)    #전체 한글 가사
+        # reading_sounds = ''.join(reading_sound)     #전체 독음 가사
+    except:
+        yield "error!"

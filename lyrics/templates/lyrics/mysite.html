@@ -1,49 +1,47 @@
 {% extends 'lyrics/base.html' %}
 {% load static %}
 {% block content %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>
-    <center>
-        <div>
-            <h1>일본 노래 가사 검색 &amp; 독음</h1>
-        </div>
-    </center>
-</p>
-<p>
+<div>
+    <h1>일본 노래 가사 &amp; 독음 검색</h1>
+</div>
+<div>
     <div>
-        <center>
-            <form action="{% url 'findLyrics' %}" method = "post">
-            {% csrf_token %}
-            <input placeholder="가수 이름과 제목을 입력하세요" type="text" name="inputValue"/>
-            <button type="submit" class="button button1">찾기</button>
-        </center>
+        <form action="{% url 'findLyrics' %}" method = "post">
     </div>
-</p>
-<p>
-    <center>
-        <a onclick="inputPage()">일본어(히라가나) 입력기</a>
-    </center>
-</p>
-<p>
-    <center>
-        <a onclick="inputPage2()">일본어 입력기</a>
-    </center>
-</p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>
-    <center>
-        <div id="box2">
-            conansjh20@naver.com <br>
-            <a href="https://conansjh20.tistory.com/" target="_blank">티스토리 블로그</a>
-        </div>
-    </center>
-</p>
+    {% csrf_token %}
+    <div>
+        <input placeholder="곡명을 입력하세요" type="text" name="input_song"/>
+    </div>
+    <div>
+        <input placeholder="가수명을 입력하세요" type="text" name="input_singer"/>
+    </div>
+    <div>
+        <button type="submit" class="button">찾기</button>
+    </div>
+</div>
+<div class='input_japanese'>
+    <a onclick="inputPage()">일본어 입력기1 (일본어(히라가나) 버튼으로 입력)</a>
+</div>
+<div class='input_japanese'>
+    <a onclick="inputPage2()">일본어 입력기2 (한국어 독음으로 입력하여 변환)</a>
+</div>
+<div>
+    <p>
+        <li>
+            일본 노래의 곡명과 가수명을 입력하면 노래의 가사와 독음을 보여줍니다.
+        </li>
+        <li>
+            영문으로 검색하거나 철자가 약간 틀려도 검색되며 가수명을 공란으로 작성해도 됩니다.
+        </li>
+        <li>
+            가사는 일본의 가사 검색 홈페이지(<a href="http://j-lyric.net/" target="_blank">http://j-lyric.net/</a>)에서 가져옵니다.
+        </li>
+    </p>
+</div>
+<div>
+    <p>
+        conansjh20@naver.com <br>
+        <a href="https://conansjh20.tistory.com/" target="_blank">티스토리 블로그</a>
+    </p>
+</div>
 {% endblock %}
